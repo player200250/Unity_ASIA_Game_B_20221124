@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using System.Collections;
 
 namespace Jay 
 {
@@ -31,8 +32,41 @@ namespace Jay
             goTriangle = GameObject.Find("對話圖示");
             goTriangle.SetActive(false);
 
+            StartCoroutine(FadeGroup());
+            StartCoroutine(TypeEffect());
+
         } 
         #endregion
+
+        private IEnumerator FadeGroup() 
+        {
+            for(int i = 0; i<10; i++) 
+            {
+                groupDialogue.alpha += 0.1f;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        /// <summary>
+        /// 打字效果
+        /// </summary>
+
+        private IEnumerator TypeEffect() 
+        {
+            textName.text = dialogueOpening.dialogueName;
+            textContext.text = "";
+
+            string dialogue = dialogueOpening.dialogueContents [1];
+
+            for (int i = 0; i < dialogue.Length; i++)
+            {
+                textContext.text += dialogue[i];
+                yield return dialogueInterval;
+            }
+
+            goTriangle.SetActive(true);
+
+        }
     }
 
 }
