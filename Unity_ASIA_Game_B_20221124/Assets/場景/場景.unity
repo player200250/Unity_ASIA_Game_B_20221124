@@ -6045,7 +6045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1384590291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6574,6 +6574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueIntervalTime: 0.1
   dialogueOpening: {fileID: 11400000, guid: 0872c1ea11f109b44bfde04314174d06, type: 2}
+  dialogueKey: 323
 --- !u!1001 &1550353556
 PrefabInstance:
   m_ObjectHideFlags: 0
