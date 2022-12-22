@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using OpenCover.Framework.Model;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace Jay 
 {
@@ -10,7 +12,13 @@ namespace Jay
     {
         [SerializeField, Header("對話資料")]
         private DialogueDeta detaDialogue;
+        [SerializeField, Header("對話結束後的事件")]
+        private UnityEvent onDialogueFinish;
 
+        [SerializeField, Header("啟動道具")]
+        private GameObject propActive;
+        [SerializeField, Header("啟動後的對話資料")]
+        private DialogueDeta detaDialogueActive;
         private string nameTarget = "PlayerCapsule";
         private DialogueSystem dialogueSystem;
 
@@ -28,7 +36,16 @@ namespace Jay
             if(other.name.Contains(nameTarget))
             {
                 print(other.name);
-                dialogueSystem.StartDialogue(detaDialogue);
+
+                //如果 不需要啟動道具 或者 啟動道具是顯示沒拿(還沒拿) 就執行 第一段話
+                if (propActive == null || propActive.activeInHierarchy)
+                {
+                    dialogueSystem.StartDialogue(detaDialogue, onDialogueFinish);
+                }
+                else
+                {
+                    dialogueSystem.StartDialogue(detaDialogueActive);
+                }
             }
         }
 
@@ -41,6 +58,14 @@ namespace Jay
         private void OnTriggerStay(Collider other)
         {
             
+        }
+
+        ///<summary>
+        ///隱藏物件
+        ///</summary>
+        public void HiddenObject()
+        {
+            gameObject.SetActive(false);
         }
     }
 

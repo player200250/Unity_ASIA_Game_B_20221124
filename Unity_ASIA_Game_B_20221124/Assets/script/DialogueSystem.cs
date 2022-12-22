@@ -4,6 +4,8 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 namespace Jay 
 {
@@ -13,6 +15,8 @@ namespace Jay
     public class DialogueSystem : MonoBehaviour
     {
         #region 資料區域
+
+
         [SerializeField, Header("對話間隔"), Range(0, 0.5f)]
         private float dialogueIntervalTime = 0.1f;
         [SerializeField, Header("開頭對話")]
@@ -28,6 +32,9 @@ namespace Jay
         private GameObject goTriangle;
         #endregion
 
+        private PlayerInput playerInput;
+        private UnityEvent onDialogueFinish;
+
         #region 事件區域
         private void Awake()
         {
@@ -37,14 +44,24 @@ namespace Jay
             goTriangle = GameObject.Find("對話圖示");
             goTriangle.SetActive(false);
 
+            playerInput = GameObject.Find("PlayerCapsule").GetComponent<PlayerInput>();
+
             StartDialogue(dialogueOpening);
         }
         #endregion
 
-        public void StartDialogue(DialogueDeta deta) 
+        /// <summary>
+        /// 開始對話
+        /// </summary>
+        /// <param name="deta">要執行的資料</param>
+        /// <param name="_onDialogueFinish">對話結束後的事件，可以空值</param>
+
+        public void StartDialogue(DialogueDeta deta, UnityEvent _onDialogueFinish = null) 
         {
+            playerInput.enabled= false;
             StartCoroutine(FadeGroup());
             StartCoroutine(TypeEffect(deta));
+            onDialogueFinish = _onDialogueFinish;
         }
         
 
@@ -99,6 +116,9 @@ namespace Jay
             }
 
             StartCoroutine(FadeGroup(false));
+
+            playerInput.enabled = true;
+            onDialogueFinish?.Invoke();
         }
     }
 
