@@ -19,6 +19,9 @@ namespace Jay
         private GameObject propActive;
         [SerializeField, Header("啟動後的對話資料")]
         private DialogueDeta detaDialogueActive;
+        [SerializeField, Header("啟動對話結束後的事件")]
+        private UnityEvent onDialogueFinishAfterActive;
+
         private string nameTarget = "PlayerCapsule";
         private DialogueSystem dialogueSystem;
 
@@ -44,7 +47,7 @@ namespace Jay
                 }
                 else
                 {
-                    dialogueSystem.StartDialogue(detaDialogueActive);
+                    dialogueSystem.StartDialogue(detaDialogueActive,onDialogueFinishAfterActive);
                 }
             }
         }
