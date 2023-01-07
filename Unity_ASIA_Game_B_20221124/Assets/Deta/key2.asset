@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: key2
   m_EditorClassIdentifier: 
   dialogueName: 
-  dialogueContents: []
+  dialogueContents:
+  - "\u6709\u4E86!!!"
