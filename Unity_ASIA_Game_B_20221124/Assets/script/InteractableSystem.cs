@@ -1,5 +1,4 @@
-﻿using OpenCover.Framework.Model;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace Jay 

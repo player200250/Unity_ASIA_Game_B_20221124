@@ -2,7 +2,7 @@ using Jay;
 using UnityEngine;
 
 
-namespace MyNamespace
+namespace Jay
 {
     /// <summary>
     /// 玩家結束管理 ; 過關

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace MyNamespace
+namespace Jay
 {
     /// <summary>
     /// 射擊系統
